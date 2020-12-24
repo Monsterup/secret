@@ -8,6 +8,8 @@ var dotenv = require('dotenv');
 var jwt = require('jsonwebtoken');
 var cors = require('cors');
 
+const graphQlSchema = require('./graphql/schema/index');
+const graphQlResolvers = require('./graphql/resolvers/index');
 var isAuth = require('./middleware/is-auth');
 var connectDB = require('./db');
 
@@ -34,17 +36,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTING
-// app.use(isAuth);
+app.use(isAuth);
 app.use('/', usersRouter);
 
-// const apolloServer = new ApolloServer({
-//   schema: graphQlSchema,
-//   rootValue: graphQlResolvers,
-//   graphiql: true,
-//   context: ({req, res}) => ({req, res})
-// });
+const apolloServer = new ApolloServer({
+  schema: graphQlSchema,
+  rootValue: graphQlResolvers,
+  graphiql: true,
+  context: ({req, res}) => ({req, res})
+});
 
-// apolloServer.applyMiddleware({ app, cors:false });
+apolloServer.applyMiddleware({ app, cors:false });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
