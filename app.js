@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var debug = require('debug')('avesboxapi:server');
+var http = require('http');
+
+// PORT
+var port = process.env.PORT || '3000';
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,4 +43,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(port, () => {
+  console.log("App running on port " + port)
+});
