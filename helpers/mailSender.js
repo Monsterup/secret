@@ -2,9 +2,7 @@ const nodemailer = require('nodemailer');
 const responseMsg = require('../helpers/responseMessage');
 
 var transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
         user: "avesbox2020@gmail.com",
         pass: "xvbpdykmzahysdtx"
