@@ -2,11 +2,13 @@ const nodemailer = require('nodemailer');
 const responseMsg = require('../helpers/responseMessage');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: "avesbox2020@gmail.com",
-    pass: "Pemalang123"
-  }
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: "avesbox2020@gmail.com",
+        pass: "xvbpdykmzahysdtx"
+    }
 });
 
 exports.forgetPassword = async (email, token) => {
